@@ -32,6 +32,7 @@ preg_match('/http\:\/\/www\.leyifan\.com\/cht\/rtzdm\/login\?returnurl\=http%3A%
 if(is_file("ley.txt")) unlink("ley.txt");
 
 echo "ok";
+
 function go_ley($url, $data = '', $ref = '',$mycookie='',$token='',$posty='n') {    
     $rootdir = dirname(__FILE__);
     $SSL = substr($url, 0, 8) == "https://" ? true : false;  
