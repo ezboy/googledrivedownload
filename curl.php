@@ -1,6 +1,6 @@
 <?php
 
-echo fetch_data('http://tv168.info/news.html');
+echo fetch_data('http://tv168.info/news/etv1.html');
 
 function fetch_data($url, $data = '', $ref = 'http://tv168.info/home.html'){    
 	$cookiename = "cookie.txt";
