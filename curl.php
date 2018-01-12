@@ -1,8 +1,8 @@
 <?php
 
-echo fetch_data('https://www.ptt.cc/bbs/baseball/index.html');
+echo fetch_data('http://tv168.info/news.html');
 
-function fetch_data($url, $data = '', $ref = ''){    
+function fetch_data($url, $data = '', $ref = 'http://tv168.info/home.html'){    
 	$cookiename = "cookie.txt";
     $rootdir = dirname(__FILE__)."/";
     $SSL = substr($url, 0, 8) == "https://" ? true : false;  
