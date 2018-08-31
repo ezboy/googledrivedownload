@@ -1,8 +1,8 @@
 <?php
 
-echo fetch_data('http://tv168.info/news/etv2.html');
+echo fetch_data('http://tv168.info/news/etv1.html');
 
-function fetch_data($url, $data = '', $ref = 'http://tv168.info/home.html'){    
+function fetch_data($url, $data = '', $ref = 'http://tv168.info/news.html'){    
 	$cookiename = "cookie.txt";
     $rootdir = dirname(__FILE__)."/";
     $SSL = substr($url, 0, 8) == "https://" ? true : false;  
