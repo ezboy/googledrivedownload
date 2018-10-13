@@ -9,6 +9,8 @@ $USERIP = get_userip();
 $acc = $_GET['acc'];
 $pass = $_GET['pass'];
 
+if(empty($acc) || empty($pass)) die('acc or pass?');
+
 $login_url = 'https://grp03.id.rakuten.co.jp/rms/nid/logini';
 $login_data = "service_id=r12&return_url=login%3Ftool_id%3D1&id=&tp=&u={$acc}&p={$pass}&submit=%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3&pp_version=20170213&device_fp=7527468aa875624f9ccf2a2cfd5c1aa9&time_zone=-480&os_info=Win32";
 	
