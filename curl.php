@@ -4,10 +4,13 @@ echo fetch_data('http://tv168.info/news/etv1.html');
 
 function fetch_data($url, $data = '', $ref = 'http://tv168.info/news.html'){    
 	$cookiename = "cookie.txt";
-    $rootdir = dirname(__FILE__)."/";
+    $rootdir = __DIR__."/";
     $SSL = substr($url, 0, 8) == "https://" ? true : false;  
 	if(empty($ref)) $ref = $url;
-    $ch = curl_init();  
+    $ch = curl_init();
+    if ($ch === false) {
+        return "Failed to initialize cURL session.";
+    }
     curl_setopt($ch, CURLOPT_URL, $url);  
     curl_setopt($ch, CURLOPT_TIMEOUT, 5);  
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);  

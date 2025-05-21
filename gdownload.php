@@ -14,9 +14,12 @@ $realpath = $rs2[1];
 header('location:'.$realpath);
 die;
 function fetch_data($url){    
-  	$rootdir = dirname(__FILE__);
+  	$rootdir = __DIR__;
     $SSL = substr($url, 0, 8) == "https://" ? true : false;  
-    $ch = curl_init();  
+    $ch = curl_init();
+    if ($ch === false) {
+        die("Failed to initialize cURL session.");
+    }
     curl_setopt($ch, CURLOPT_URL, $url);  
 	  curl_setopt($ch, CURLOPT_REFERER, $url);
     curl_setopt($ch, CURLOPT_TIMEOUT, 0);  
@@ -24,13 +27,18 @@ function fetch_data($url){
 	  curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36"); 
     if ($SSL) {  
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);   
-        @curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1); 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); 
     }
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
-	  curl_setopt($ch, CURLOPT_COOKIEJAR, $rootdir.'gcookie.txt'); 	
-	  curl_setopt($ch, CURLOPT_COOKIEFILE, $rootdir.'gcookie.txt'); 
-    $ret = curl_exec($ch);  
+	  curl_setopt($ch, CURLOPT_COOKIEJAR, $rootdir.'/gcookie.txt');
+	  curl_setopt($ch, CURLOPT_COOKIEFILE, $rootdir.'/gcookie.txt');
+    $ret = curl_exec($ch);
+    if (curl_errno($ch)) {
+        $error_msg = curl_error($ch);
+        curl_close($ch);
+        die("cURL Error: " . $error_msg);
+    }
   
     curl_close($ch);  
     return $ret;     
